@@ -561,6 +561,27 @@ endef
 $(eval $(call KernelPackage,tun))
 
 
+define KernelPackage/imq
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=imq device driver
+  DEPENDS:=+kmod-nf-ipt
+  KCONFIG:=CONFIG_IMQ \
+	CONFIG_IMQ_NUM_DEVS=16 \
+	CONFIG_IMQ_BEHAVIOR_AA=n \
+	CONFIG_IMQ_BEHAVIOR_AB=n \
+	CONFIG_IMQ_BEHAVIOR_BA=y \
+	CONFIG_IMQ_BEHAVIOR_BB=n
+  FILES:=$(LINUX_DIR)/drivers/net/imq.ko
+  AUTOLOAD:=$(call AutoLoad,30,imq)
+endef
+
+define KernelPackage/imq/description
+ Kernel support for imq device
+endef
+
+$(eval $(call KernelPackage,imq))
+
+
 define KernelPackage/veth
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Virtual ethernet pair device

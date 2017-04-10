@@ -837,6 +837,22 @@ endef
 $(eval $(call KernelPackage,ipt-hashlimit))
 
 
+define KernelPackage/ipt-imq
+  SUBMENU:=$(NF_MENU)
+  TITLE:=Netfilter IMQ Target support
+  DEPENDS:=+kmod-nf-ipt +kmod-imq
+  KCONFIG:=CONFIG_NETFILTER_XT_TARGET_IMQ
+  FILES:=$(LINUX_DIR)/net/netfilter/xt_IMQ.ko
+  AUTOLOAD:=$(call AutoProbe,xt_IMQ.ko)
+endef
+
+define KernelPackage/ipt-imq/description
+  Netfilter IMQ Target
+endef
+
+$(eval $(call KernelPackage,ipt-imq))
+
+
 define KernelPackage/nft-core
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables support
