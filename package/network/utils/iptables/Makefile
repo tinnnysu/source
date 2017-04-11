@@ -191,7 +191,7 @@ iptables extensions for user-space packet logging.
 endef
 
 define Package/iptables-mod-imq
-$(call Package/iptables/Module, +kmod-imq)
+$(call Package/iptables/Module, +kmod-ipt-imq)
   TITLE:=imq iptables support
 endef
 
