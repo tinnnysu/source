@@ -532,7 +532,7 @@ endef
 
 define Package/iptables-mod-l7filter/install
 	$(INSTALL_DIR) $(1)/usr/lib/iptables
-	$(CP) $(PKG_BUILD_DIR)/extensions/libxt_layer7.so $(1)/usr/lib/
+	$(CP) $(PKG_BUILD_DIR)/extensions/libxt_layer7.so $(1)/usr/lib/iptables/
 endef
 
 define BuildPlugin
