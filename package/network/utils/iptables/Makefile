@@ -190,6 +190,19 @@ iptables extensions for user-space packet logging.
 
 endef
 
+define Package/iptables-mod-imq
+$(call Package/iptables/Module, +kmod-ipt-imq)
+  TITLE:=imq iptables support
+endef
+
+define Package/iptables-mod-imq/description
+iptables extensions for imq.
+
+ Targets:
+  - IMQ
+
+endef
+
 define Package/iptables-mod-nflog
 $(call Package/iptables/Module, +kmod-nfnetlink-log +kmod-ipt-nflog)
   TITLE:=Netfilter NFLOG target
@@ -517,6 +530,11 @@ define Package/libxtables/install
 	$(CP) $(PKG_BUILD_DIR)/extensions/libiptext.so $(1)/usr/lib/
 endef
 
+define Package/iptables-mod-imq/install
+	$(INSTALL_DIR) $(1)/usr/lib/iptables
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/iptables/libxt_IMQ.so $(1)/usr/lib/iptables/
+endef
+
 define BuildPlugin
   define Package/$(1)/install
 	$(INSTALL_DIR) $$(1)/usr/lib/iptables
@@ -556,3 +574,4 @@ $(eval $(call BuildPackage,libiptc))
 $(eval $(call BuildPackage,libip4tc))
 $(eval $(call BuildPackage,libip6tc))
 $(eval $(call BuildPackage,libxtables))
+$(eval $(call BuildPackage,iptables-mod-imq))
