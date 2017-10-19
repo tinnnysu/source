@@ -355,6 +355,19 @@ U32 iptables extensions.
 
 endef
 
+define Package/iptables-mod-l7filter
+$(call Package/iptables/Module, +kmod-ipt-l7filter)
+  TITLE:=layer7 iptables extensions
+endef
+
+define Package/iptables-mod-l7filter/description
+layer7 iptables extensions.
+
+ Matches:
+  - layer7
+
+endef
+
 define Package/ip6tables
 $(call Package/iptables/Default)
   DEPENDS:=@IPV6 +kmod-ip6tables +iptables
@@ -517,6 +530,11 @@ define Package/libxtables/install
 	$(CP) $(PKG_BUILD_DIR)/extensions/libiptext.so $(1)/usr/lib/
 endef
 
+define Package/iptables-mod-l7filter/install
+	$(INSTALL_DIR) $(1)/usr/lib/iptables
+	$(CP) $(PKG_BUILD_DIR)/extensions/libxt_layer7.so $(1)/usr/lib/
+endef
+
 define BuildPlugin
   define Package/$(1)/install
 	$(INSTALL_DIR) $$(1)/usr/lib/iptables
@@ -556,3 +574,4 @@ $(eval $(call BuildPackage,libiptc))
 $(eval $(call BuildPackage,libip4tc))
 $(eval $(call BuildPackage,libip6tc))
 $(eval $(call BuildPackage,libxtables))
+$(eval $(call BuildPackage,iptables-mod-l7filter))
