@@ -852,6 +852,22 @@ endef
 
 $(eval $(call KernelPackage,ipt-imq))
 
+define KernelPackage/ipt-l7filter
+  SUBMENU:=$(NF_MENU)
+  TITLE:=Netfilter layer7 match
+  DEPENDS:=+kmod-ipt-core +kmod-ipt-conntrack
+  KCONFIG:=CONFIG_NETFILTER_XT_MATCH_LAYER7 \
+	  CONFIG_NETFILTER_XT_MATCH_LAYER7_DEBUG=y
+  FILES:=$(LINUX_DIR)/net/netfilter/xt_layer7.ko
+  AUTOLOAD:=$(call AutoProbe,xt_layer7)
+  $(call KernelPackage/ipt)
+endef
+
+define KernelPackage/ipt-l7filter/description
+ Kernel modules support for the layer7 protocol match module
+endef
+
+$(eval $(call KernelPackage,ipt-l7filter))
 
 define KernelPackage/nft-core
   SUBMENU:=$(NF_MENU)
