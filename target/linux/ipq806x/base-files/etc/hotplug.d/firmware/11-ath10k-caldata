@@ -56,6 +56,9 @@ case "$FIRMWARE" in
 	qcom,ap-dk01.1-c1)
 		ath10kcal_extract "ART" 4096 12064
 		;;
+	compex,wpj428)
+		ath10kcal_extract "ART" 4096 12064
+		;;
 	esac
 	;;
 "ath10k/pre-cal-ahb-a800000.wifi.bin")
@@ -67,6 +70,9 @@ case "$FIRMWARE" in
 		ath10kcal_extract "0:ART" 20480 12064
 		;;
 	qcom,ap-dk01.1-c1)
+		ath10kcal_extract "ART" 20480 12064
+		;;
+	compex,wpj428)
 		ath10kcal_extract "ART" 20480 12064
 		;;
 	esac

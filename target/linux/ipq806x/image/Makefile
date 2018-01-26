@@ -181,6 +181,21 @@ define Device/openmesh_a42
 endef
 TARGET_DEVICES += openmesh_a42
 
+define Device/compex_wpj428
+	DEVICE_TITLE := COMPEX WPJ428
+	BOARD_NAME := wpj428
+	DEVICE_DTS := qcom-ipq4019-wpj428
+	KERNEL_LOADADDR := 0x80208000
+	KERNEL_INSTALL := 1
+	KERNEL_SIZE := 4096k
+	IMAGE_SIZE := 26624k
+	$(call Device/FitImage)
+	IMAGES := sysupgrade.bin
+	IMAGE/sysupgrade.bin := append-kernel | pad-to $$$${KERNEL_SIZE} | append-rootfs | pad-rootfs | append-metadata
+	DEVICE_PACKAGES := ath10k-firmware-qca4019
+endef
+TARGET_DEVICES += compex_wpj428
+
 define Device/qcom_ap-dk01.1-c1
 	DEVICE_TITLE := QCA AP-DK01.1-C1
 	BOARD_NAME := ap-dk01.1-c1
